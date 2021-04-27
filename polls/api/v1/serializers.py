@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from polls.models import Question, Choice
+from polls.models import Question, Choice, Comment
 
 
 class QuestionSerializer(serializers.ModelSerializer):
@@ -37,3 +37,16 @@ class ChoiceSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'question': {'write_only': True}
         }
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    question_text = serializers.CharField(read_only=True,
+                                          source='question.question_text')
+
+    class Meta:
+        model = Comment
+        fields = (
+            'question_text',
+            'email',
+            'body',
+        )

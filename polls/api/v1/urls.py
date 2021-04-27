@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ChoiceView, QuestionView
+from .views import ChoiceView, QuestionView, CommentView
 
 
 urlpatterns = [
@@ -8,4 +8,6 @@ urlpatterns = [
 
     path('choices/', ChoiceView.as_view(),
          name='choiceAPI-view'),
+
+    path('comments/', CommentView.as_view(), name='commentAPI-view')
 ]
