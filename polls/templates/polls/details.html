@@ -1,0 +1,50 @@
+{% load crispy_forms_tags %}
+
+<a href="{% url 'polls:index' %}">Home</a> <br> <br>
+
+<fieldset>
+    <h1><u> {{ question.question_text }} </u></h1>
+<h4>{{ question.views  }}</h4>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'polls:vote' question.id %}" method="post">
+{% csrf_token %}
+{% for choice in question.choice_set.all %}
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+{% endfor %}
+    <br>
+    <input type="submit" value="vote">
+    </form>
+</fieldset>
+
+<h4>Tags</h4>
+{% for tag in question.question_tags.all|join:"#" %}
+    {{ tag }}
+{% endfor %}
+<br><br>
+
+
+{% if comment %}
+  <h2>Your comment has been added.</h2>
+{% else %}
+  <h2>Add a new comment</h2>
+  <form action="." method="post">
+    {{ form|crispy }}
+    {% csrf_token %}
+    <p><input type="submit" value="Add comment"></p>
+  </form>
+{% endif %}
+
+<br>
+
+{% for comment in comments %}
+<p><strong>{{ comment.email }}</strong></p>
+<p><i>{{ comment.body }} </i></p>
+<br>
+{% endfor %}
+
+
+
+

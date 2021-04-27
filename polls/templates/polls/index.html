@@ -1,0 +1,35 @@
+{% load static %}
+
+{% if user.is_authenticated %}
+    <img width="100px" height="100px" align="right" src="{{ user.image.url }}">
+    <a href="{% url 'users:logout' %}" style="float: right">Logout</a>
+    <h4>Hello {{ user.first_name }}</h4>
+    <a href="{% url 'users:change_password' %}" style="float: right">Change Password</a>
+{% else %}
+    <a href="{% url 'users:login' %}">Login</a>
+    <a href="{% url 'users:signup' %}" style="float: right">Sign Up</a>
+{% endif %}
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+
+{% if latest_question_list %}
+    <ul>
+        {% for question in latest_question_list %}
+          <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+<h2>Most Popular Poll</h2>
+<p>{{ popular_polls.question_text }}</p>
+
+<br><br>
+{% if messages %}
+    {% for message in messages %}
+        <h3 style="text-align:center">{{ message }}</h3>
+    {% endfor %}
+{% endif %}
+
