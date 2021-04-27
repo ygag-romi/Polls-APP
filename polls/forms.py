@@ -38,5 +38,3 @@ class VerifyTagForm(forms.ModelForm):
         return tag
 
 
-
-
