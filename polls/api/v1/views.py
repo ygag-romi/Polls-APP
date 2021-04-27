@@ -13,6 +13,6 @@ class ChoiceView(rest_generics.ListCreateAPIView):
     queryset = Choice.objects.all()
 
 
-class CommentView(rest_generics.ListAPIView):
+class CommentView(rest_generics.ListCreateAPIView):
     serializer_class = CommentSerializer
     queryset = Comment.objects.all()
