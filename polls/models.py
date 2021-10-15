@@ -29,6 +29,9 @@ class Question(models.Model):
     expiry = models.DateTimeField(null=True, default=None)
     priority = models.PositiveIntegerField(default=0, blank=True)
     question_tags = models.ManyToManyField(Tag, related_name='que_tags')
+    closed = models.BooleanField(default=False,
+                                 help_text="marks a poll as closed")
+    # added 'closed' field later on to test django custom commands
 
     def __str__(self):
         return self.question_text

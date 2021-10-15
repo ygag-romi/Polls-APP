@@ -40,7 +40,7 @@ class QuestionAdmin(admin.ModelAdmin):
         ('Your Questions', {'fields': ['question_text']}),
         ('', {'fields': ['created_by']}),
         ('Date Info', {'fields': ['pub_date']}),
-        ('Expiry Date', {'fields': ['expiry']}),
+        ('Expiry Details', {'fields': ['expiry', 'closed']}),
         ('Sort Priority', {'fields': ['priority']}),
     ]
     inlines = [ChoiceInLine, CommentInLine, TagsInLine]
